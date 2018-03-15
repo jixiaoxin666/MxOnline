@@ -1,3 +1,4 @@
+# _*_ encoding:utf-8 _*_
 """
 Django settings for MxOnline project.
 
@@ -11,10 +12,12 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+import sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))  # 把apps设置为根目录加到搜索路径之下 首先搜索的是apps下面的东西
+sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))  # 把extra_apps设置为根目录加到搜索路径之下 首先搜索的是apps下面的东西
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -27,7 +30,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,10 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users'
-    'courses'
-    'organization'
-    'operation'
+    'users',
+    'courses',
+    'organization',
+    'operation',
+    'xadmin',
+    'crispy_forms'  # 安装xadmin时的依赖包 需注册
 ]
 
 AUTH_USER_MODEL = "users.UserProfile"
@@ -77,7 +81,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'MxOnline.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
@@ -95,10 +98,13 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': 'jihuixin2011',
         'HOST': '127.0.0.1',
+        # 取消外键检查
+        'OPTIONS': {
+            "init_command": "SET foreign_key_checks = 0;",
+        }
+
     }
 }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
@@ -118,20 +124,20 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'  # 修改系统支持汉字(管理端会以中文显示) 注:django1.7以及之前叫zh-CN
+# TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'  # 修改时区
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
-
+# USE_TZ = True
+USE_TZ = False  # 如果不改为false,django在数据库存储过程中会使用UTC的时间即国际时间 设为false即使用本地时间
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
