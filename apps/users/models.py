@@ -40,6 +40,10 @@ class EmailVerifyRecord(models.Model):
         verbose_name = u'邮箱验证码'
         verbose_name_plural = verbose_name
 
+    # 重载__unicode__方法(当调用string方法时会自动调用这个方法)
+    def __unicode__(self):
+        return '{0}({1})'.format(self.code, self.email)
+
 
 class Banner(models.Model):
     title = models.CharField(max_length=100, verbose_name=u'标题')

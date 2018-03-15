@@ -14,7 +14,7 @@ class Course(models.Model):
     name = models.CharField(max_length=50, verbose_name=u'课程名称')
     desc = models.CharField(max_length=300, verbose_name=u'课程描述')
     detail = models.TextField(verbose_name=u'课程详情')  # 不用char而使用text类型不需要限制最大长度
-    degree = models.CharField(choices=(('cj', '初级'), ('zj', '中级'), ('gj', '高级')))
+    degree = models.CharField(choices=(('cj', '初级'), ('zj', '中级'), ('gj', '高级')),max_length=10)
     learn_times = models.IntegerField(default=0, verbose_name=u'学习时长')
     students = models.IntegerField(default=0, verbose_name=u'学习人数')
     fav_nums = models.IntegerField(default=0, verbose_name=u'收藏人数')
