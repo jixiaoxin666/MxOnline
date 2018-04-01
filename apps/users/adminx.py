@@ -4,6 +4,12 @@ __date__ = '2018/3/15 下午5:32'
 
 import xadmin
 from .models import EmailVerifyRecord, Banner
+from xadmin import views
+
+
+class BaseSetting(object):
+    enable_themes = True  # 使用主题功能
+    use_bootswatch = True
 
 
 class EmailVerifyRecordAdmin(object):
@@ -27,3 +33,5 @@ class BannerAdmin(object):
 # model和admin进行关联注册
 xadmin.site.register(EmailVerifyRecord, EmailVerifyRecordAdmin)
 xadmin.site.register(Banner, BannerAdmin)
+
+xadmin.site.register(views.BaseAdminView, BaseSetting)  # 把xadmin的主题功能注册进来
