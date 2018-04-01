@@ -12,6 +12,13 @@ class BaseSetting(object):
     use_bootswatch = True
 
 
+# 设置xadmin的左上角页头和下面的页脚,如下两个参数是固定的
+class GlobalSetting(object):
+    site_title = '慕学后台管理系统'
+    site_footer = '慕学在线网'
+    menu_style = 'accordion'  # 设置左侧菜单的显示方式(可折叠可收起)
+
+
 class EmailVerifyRecordAdmin(object):
     # 定义后台列表显示列
     list_display = ['code', 'email', 'send_type', 'send_time']
@@ -35,3 +42,4 @@ xadmin.site.register(EmailVerifyRecord, EmailVerifyRecordAdmin)
 xadmin.site.register(Banner, BannerAdmin)
 
 xadmin.site.register(views.BaseAdminView, BaseSetting)  # 把xadmin的主题功能注册进来
+xadmin.site.register(views.CommAdminView, GlobalSetting)  # 把xadmin的页头和页脚的设置功能注册进来
