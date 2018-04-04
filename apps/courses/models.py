@@ -39,6 +39,7 @@ class Lesson(models.Model):
         verbose_name = u'章节'
         verbose_name_plural = verbose_name
 
+    # 做别人外键时按如下格式显示
     def __unicode__(self):
         return '{}({})'.format(self.course, self.name)
 
